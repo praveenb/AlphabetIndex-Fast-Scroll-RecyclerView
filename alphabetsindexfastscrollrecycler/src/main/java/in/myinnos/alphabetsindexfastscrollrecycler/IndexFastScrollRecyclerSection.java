@@ -33,6 +33,7 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
     private int mListViewWidth;
     private int mListViewHeight;
     private int mCurrentSection = -1;
+    private int mCurrentPreviewSection = -1;
     private boolean mIsIndexing = false;
     private RecyclerView mRecyclerView = null;
     private SectionIndexer mIndexer = null;
@@ -105,8 +106,8 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
             canvas.drawRoundRect(mIndexbarRect, setIndexBarCornerRadius * mDensity, setIndexBarCornerRadius * mDensity, indexbarPaint);
 
             if (mSections != null && mSections.length > 0) {
-                // Preview is shown when mCurrentSection is set
-                if (previewVisibility && mCurrentSection >= 0 && mSections[mCurrentSection] != "") {
+                // Preview is shown when mCurrentPreviewSection is set
+                if (previewVisibility && mCurrentPreviewSection >= 0 && mSections[mCurrentPreviewSection] != "") {
                     Paint previewPaint = new Paint();
                     previewPaint.setColor(previewBackgroundColor);
                     previewPaint.setAlpha(previewBackgroudAlpha);
@@ -119,7 +120,7 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
                     previewTextPaint.setTextSize(setPreviewTextSize * mScaledDensity);
                     previewTextPaint.setTypeface(setTypeface);
 
-                    float previewTextWidth = previewTextPaint.measureText(mSections[mCurrentSection]);
+                    float previewTextWidth = previewTextPaint.measureText(mSections[mCurrentPreviewSection]);
                     float previewSize = 2 * mPreviewPadding + previewTextPaint.descent() - previewTextPaint.ascent();
                     previewSize = Math.max(previewSize, previewTextWidth + 2 * mPreviewPadding);
                     RectF previewRect = new RectF((mListViewWidth - previewSize) / 2
@@ -128,7 +129,7 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
                             , (mListViewHeight - previewSize) / 2 + previewSize);
 
                     canvas.drawRoundRect(previewRect, 5 * mDensity, 5 * mDensity, previewPaint);
-                    canvas.drawText(mSections[mCurrentSection], previewRect.left + (previewSize - previewTextWidth) / 2 - 1
+                    canvas.drawText(mSections[mCurrentPreviewSection], previewRect.left + (previewSize - previewTextWidth) / 2 - 1
                             , previewRect.top + (previewSize - (previewTextPaint.descent() - previewTextPaint.ascent())) / 2 - previewTextPaint.ascent(), previewTextPaint);
                     fade(300);
                 }
@@ -181,6 +182,7 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
                     mIsIndexing = true;
                     // Determine which section the point is in, and move the list to that section
                     mCurrentSection = getSectionByPoint(ev.getY());
+                    mCurrentPreviewSection = mCurrentSection;
                     scrollToPosition();
                     return true;
                 }
@@ -191,6 +193,7 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
                     if (contains(ev.getX(), ev.getY())) {
                         // Determine which section the point is in, and move the list to that section
                         mCurrentSection = getSectionByPoint(ev.getY());
+                        mCurrentPreviewSection = mCurrentSection;
                         scrollToPosition();
                     }
                     return true;
@@ -199,7 +202,8 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
             case MotionEvent.ACTION_UP:
                 if (mIsIndexing) {
                     mIsIndexing = false;
-                    mCurrentSection = -1;
+                   // mCurrentSection = -1;
+                    mCurrentPreviewSection = -1;
                 }
                 break;
         }
