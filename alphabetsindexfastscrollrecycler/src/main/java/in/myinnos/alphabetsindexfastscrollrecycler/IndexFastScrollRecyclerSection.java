@@ -248,6 +248,7 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
     }
 
     public void updateSections() {
+        mCurrentSection = 0;
         mSections = (String[]) mIndexer.getSections();
     }
 
