@@ -4,24 +4,20 @@ package in.myinnos.alphabetsindexfastscrollrecycler;
  * Created by MyInnos on 31-01-2017.
  */
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-
-import androidx.annotation.ColorInt;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.SectionIndexer;
+
+import androidx.annotation.ColorInt;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObserver {
 
@@ -250,6 +246,11 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
     public void updateSections() {
         mCurrentSection = 0;
         mSections = (String[]) mIndexer.getSections();
+    }
+
+    public void setSectionIndex(int sectionIndex) {
+        mCurrentSection = sectionIndex;
+        scrollToPosition();
     }
 
     public boolean contains(float x, float y) {

@@ -49,8 +49,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDataArray.remove(holder.getAdapterPosition());
-                notifyDataSetChanged();
+                /*mDataArray.remove(holder.getAdapterPosition());
+                notifyDataSetChanged();*/
+
             }
         });
     }

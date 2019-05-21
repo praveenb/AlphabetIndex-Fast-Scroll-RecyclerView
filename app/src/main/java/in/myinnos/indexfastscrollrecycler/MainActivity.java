@@ -1,6 +1,7 @@
 package in.myinnos.indexfastscrollrecycler;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 import in.myinnos.indexfastscrollrecycler.adapter.RecyclerViewAdapter;
 import in.myinnos.indexfastscrollrecycler.helper.DataHelper;
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.fast_scroller_recycler)
     IndexFastScrollRecyclerView mRecyclerView;
+
+    @BindView(R.id.btn)
+    Button btnClick;
 
     private List<String> mDataArray;
     private List<AlphabetItem> mAlphabetItems;
@@ -74,5 +79,12 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setIndexBarVisibility(true);
         mRecyclerView.setIndexbarHighLateTextColor("#33334c");
         mRecyclerView.setIndexBarHighLateTextVisibility(true);
+
+
+    }
+
+    @OnClick(R.id.btn)
+    void clickedOnBtn(){
+        mRecyclerView.setIndex(5);
     }
 }

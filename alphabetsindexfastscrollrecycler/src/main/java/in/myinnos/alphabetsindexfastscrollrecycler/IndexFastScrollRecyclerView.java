@@ -335,4 +335,8 @@ public class IndexFastScrollRecyclerView extends RecyclerView {
     public void updateSections() {
         mScroller.updateSections();
     }
+
+    public void setIndex(int section) {
+        mScroller.setSectionIndex(section);
+    }
 }
