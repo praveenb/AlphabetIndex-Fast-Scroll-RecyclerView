@@ -250,7 +250,8 @@ public class IndexFastScrollRecyclerSection extends RecyclerView.AdapterDataObse
 
     public void setSectionIndex(int sectionIndex) {
         mCurrentSection = sectionIndex;
-        scrollToPosition();
+        //mSections = (String[]) mIndexer.getSections();
+        //scrollToPosition();
     }
 
     public boolean contains(float x, float y) {
